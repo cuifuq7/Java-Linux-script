@@ -1,0 +1,34 @@
+
+
+需要把脚本放在 /opt/tools 目录下；
+mkdir /opt/tools
+mkdir /opt/apps
+cd /opt/tools
+
+
+## 安装 上传 软件
+yum -y install lrzsz
+yum -y install wget
+
+
+hostname xxx
+
+
+
+教程安装顺序：
+1. java
+2. git
+3. redis
+4. maven
+5. mysql
+
+
+
+git clone https://gitee.com/demo_projects/java-demo.git
+
+
+
+
+cd /opt/tools/apache-maven-3.9.4/conf
+ rm -rf settings.xml
+

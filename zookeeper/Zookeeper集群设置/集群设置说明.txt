@@ -1,0 +1,91 @@
+
+版本：zookeeper-3.4.12
+例如：/opt/tools/zookeeper-3.4.12
+
+
+
+关闭每台Zookeeper服务器的防火墙。
+systemctl stop firewalld.service
+systemctl disable firewalld
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+目录：/opt/tools/zookeeper-3.4.12/conf
+修改文件：zoo.cfg
+
+server.1，server.2，server.3 这对zoo.cfg 
+新增
+#######################集群########################## 
+server.1=192.168.0.52:2888:3888
+server.2=192.168.0.53:2888:3888
+server.3=192.168.0.54:2888:3888
+
+
+server.1变更为：
+dataDir=/data/zookeeper-1
+
+server.2变更为：
+dataDir=/data/zookeeper-2
+
+server.3变更为：
+dataDir=/data/zookeeper-3
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+新增文件：myid
+server.1     /data/zookeeper-1/myid
+
+myid 内容：1
+
+------------------------------
+新增文件：myid
+server.2     /data/zookeeper-2/myid
+
+myid 内容：2
+
+------------------------------
+新增文件：myid
+server.3     /data/zookeeper-3/myid
+myid 内容：2
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+启动
+当前目录：/opt/tools/zookeeper-3.4.12/bin
+./bin/zkServer.sh restart ./conf/zoo.cfg
+
+
+启动状态
+./bin/zkServer.sh status
+
+或者：
+ps aux|grep zookeeper
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+集群验证 的标识：
+
+命令：./zkServer.sh status
+ZooKeeper JMX enabled by default
+Using config: /opt/tools/zookeeper-3.4.12/bin/../conf/zoo.cfg
+Mode: follower
+
+命令：./zkServer.sh status
+ZooKeeper JMX enabled by default
+Using config: /opt/tools/zookeeper-3.4.12/bin/../conf/zoo.cfg
+Mode: leader
+
+
+
+
+
+
+
+
+
+
+
+
